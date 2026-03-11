@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ciegnny875k8r"]
+
+[ext_resource type="Script" uid="uid://bbdgaru4lht0i" path="res://item_data.gd" id="1_rhtl3"]
+[ext_resource type="Texture2D" uid="uid://dw77s6j1s2mui" path="res://icon.svg" id="1_yp48m"]
+
+[resource]
+script = ExtResource("1_rhtl3")
+id_oggetto = "legna"
+nome_visibile = "Legna Grezza"
+icona = ExtResource("1_yp48m")
+metadata/_custom_type_script = "uid://bbdgaru4lht0i"

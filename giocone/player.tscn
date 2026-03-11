@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqvamx1iqlm6l"]
 
 [ext_resource type="Script" uid="uid://chalat8qmsigg" path="res://player.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://g4a7ehw04x4g" path="res://muro.tscn" id="2_i3pqv"]
+[ext_resource type="Resource" uid="uid://1f54kbb4hoao" path="res://muro_legna.tres" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://dw77s6j1s2mui" path="res://icon.svg" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
@@ -12,7 +12,7 @@ albedo_color = Color(0.0045046993, 0.78235406, 0.011261749, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1951639514]
 script = ExtResource("1_4flbx")
-muro_scene = ExtResource("2_i3pqv")
+progetto_attuale = ExtResource("2_i3pqv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1706586963]
 shape = SubResource("CapsuleShape3D_onrkg")

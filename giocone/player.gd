@@ -20,8 +20,8 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var interact_ray = $RayCast3D
 
 # --- GATHERING E BUILDING ---
-var inventario_legna: int = 0
-@export var muro_scene: PackedScene 
+# ECCO LA NUOVA VARIABILE! Al posto della Scena, ora vuole il file Dati (.tres)
+@export var progetto_attuale: BuildingData 
 
 var is_building: bool = false
 @onready var ologramma = $Ologramma
@@ -90,44 +90,46 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	
 	# ==========================================
-	# 1. AZIONE: RACCOGLIERE (Tasto E)
+	# 1. AZIONE: RACCOGLIERE / INTERAGIRE (Tasto E)
 	# ==========================================
 	if event.is_action_pressed("interact") and not is_building:
 		interact_ray.force_raycast_update()
 		if interact_ray.is_colliding():
 			var target = interact_ray.get_collider()
-			if target.is_in_group("Risorsa"):
-				target.queue_free() 
-				inventario_legna += 1 
-				print("Cespuglio raccolto! Legna: ", inventario_legna)
-			else:
-				print("Non raccoglibile.")
+			
+			# L'ASTRAZIONE SUPREMA: Chiunque tu sia, se sai "interagire", fallo da solo.
+			if target.has_method("interagisci"):
+				target.interagisci() 
 
 	# ==========================================
 	# 2. AZIONE: ENTRA/ESCI COSTRUZIONE (Tasto B)
 	# ==========================================
 	elif event.is_action_pressed("build"):
-		if inventario_legna >= 1:
-			if muro_scene == null:
-				print("ERRORE: Inserisci la Scena del Muro nell'Ispettore!")
-				return
-				
+		
+		# Sicurezza: controlla di aver inserito il file nell'Ispettore
+		if progetto_attuale == null:
+			print("ERRORE: Non hai assegnato nessun Progetto Attuale al Player!")
+			return
+			
+		var risorsa = progetto_attuale.risorsa_richiesta
+		var costo = progetto_attuale.quantita_richiesta
+		
+		# CONTROLLO SUL DIZIONARIO USANDO I DATI DEL PROGETTO
+		if GameManager.inventario[risorsa] >= costo: 
 			is_building = !is_building 
 			ologramma.visible = is_building
 			
-			# Se stiamo ACCENDENDO l'ologramma:
 			if is_building:
-				var progetto_fantasma = muro_scene.instantiate()
-				ologramma.mesh = progetto_fantasma.get_node("MeshInstance3D").mesh
+				# Legge la mesh e la collisione dal file del progetto
+				ologramma.mesh = progetto_attuale.anteprima_mesh
+				var progetto_fantasma = progetto_attuale.scena_da_costruire.instantiate()
 				build_cast.shape = progetto_fantasma.get_node("CollisionShape3D").shape
 				progetto_fantasma.queue_free()
 				print("Progetto in mano. Premi Q per ruotare, Click per piazzare.")
-				
-			# Se stiamo SPEGNENDO l'ologramma:
 			else:
-				build_cast.shape = null # Distrugge il sensore fisico
+				build_cast.shape = null 
 		else:
-			print("Niente legna!")
+			print("Niente ", risorsa, "! Te ne servono ", costo)
 			is_building = false
 			ologramma.visible = false
 			build_cast.shape = null
@@ -145,8 +147,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		# PIAZZAMENTO (Click Sinistro)
 		elif event.is_action_pressed("confirm_build"):
 			
-			# Sicurezza: Hai ancora legna?
-			if inventario_legna <= 0:
+			var risorsa = progetto_attuale.risorsa_richiesta
+			var costo = progetto_attuale.quantita_richiesta
+			
+			# CONTROLLO DI SICUREZZA
+			if GameManager.inventario[risorsa] < costo:
 				is_building = false
 				ologramma.visible = false
 				build_cast.shape = null
@@ -155,7 +160,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			build_cast.force_shapecast_update()
 			var posso_costruire: bool = true 
 			
-			# Controlla collisioni (ignorando il Terreno)
 			if build_cast.is_colliding():
 				for i in range(build_cast.get_collision_count()):
 					var bersaglio = build_cast.get_collider(i)
@@ -165,15 +169,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			if posso_costruire == false:
 				print("ERRORE: Spazio occupato!")
 			else:
-				# Piazzo il muro
-				inventario_legna -= 1
-				var nuovo_muro = muro_scene.instantiate()
-				get_tree().current_scene.add_child(nuovo_muro)
-				nuovo_muro.global_transform = ologramma.global_transform 
-				print("Muro costruito! Legna: ", inventario_legna)
-				
-				# Se la legna è finita, spegni tutto
-				if inventario_legna <= 0:
-					is_building = false
-					ologramma.visible = false
-					build_cast.shape = null
+				# SPESA UNIVERSALE
+				if GameManager.spendi_risorsa(risorsa, costo): 
+					var nuovo_edificio = progetto_attuale.scena_da_costruire.instantiate()
+					get_tree().current_scene.add_child(nuovo_edificio)
+					nuovo_edificio.global_transform = ologramma.global_transform 
+					
+					# CONTROLLO DI SPEGNIMENTO (Se finisci le risorse, chiude l'ologramma)
+					if GameManager.inventario[risorsa] < costo:
+						is_building = false
+						ologramma.visible = false
+						build_cast.shape = null
