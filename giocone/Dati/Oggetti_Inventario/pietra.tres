@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://jor2nv0jpiox"]
+
+[ext_resource type="Texture2D" uid="uid://dw77s6j1s2mui" path="res://icon.svg" id="1_dbxdm"]
+[ext_resource type="Script" uid="uid://bbdgaru4lht0i" path="res://Classi_Dati/item_data.gd" id="2_dk440"]
+
+[resource]
+script = ExtResource("2_dk440")
+id = "pietra"
+nome_mostrato = "Pietra Grezza"
+icona = ExtResource("1_dbxdm")
+metadata/_custom_type_script = "uid://bbdgaru4lht0i"

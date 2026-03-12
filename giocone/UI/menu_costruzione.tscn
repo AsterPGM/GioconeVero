@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b15di7qyl2xls"]
+
+[ext_resource type="Script" uid="uid://bfqexri7nta76" path="res://UI/menu_costruzione.gd" id="1_q4pbx"]
+[ext_resource type="PackedScene" uid="uid://4htyuxk5rjy2" path="res://UI/slot_costruzione.tscn" id="2_b7p0p"]
+
+[node name="MenuCostruzione" type="Control" unique_id=951170898]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q4pbx")
+scena_slot = ExtResource("2_b7p0p")
+
+[node name="Panel" type="Panel" parent="." unique_id=1356024760]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_top = 0.19800001
+anchor_right = 0.69000006
+anchor_bottom = 0.81900007
+offset_left = 0.46398926
+offset_top = -0.3040161
+offset_right = 0.11993408
+offset_bottom = 0.28796387
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=17641490]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36
+anchor_top = 0.28500003
+anchor_right = 0.62100005
+anchor_bottom = 0.72800004
+offset_left = 0.27996826
+offset_top = 0.3199768
+offset_right = -0.39208984
+offset_bottom = 0.25598145
+
+[node name="Griglia" type="GridContainer" parent="ScrollContainer" unique_id=73510578]
+layout_mode = 2
+columns = 3

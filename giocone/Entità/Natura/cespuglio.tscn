@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://o31c1l0se57h"]
+
+[ext_resource type="Script" uid="uid://g3apgdhncgui" path="res://Entità/Natura/risorsa.gd" id="1_y32fj"]
+[ext_resource type="Resource" uid="uid://ciegnny875k8r" path="res://Dati/Oggetti_Inventario/legna.tres" id="2_d1ld6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwo7n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwo7n"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dteo8"]
+material = SubResource("StandardMaterial3D_uwo7n")
+
+[node name="Cespuglio" type="StaticBody3D" unique_id=522315920 groups=["Risorsa"]]
+script = ExtResource("1_y32fj")
+dati_oggetto = ExtResource("2_d1ld6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1526002008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_uwo7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1773268853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_dteo8")

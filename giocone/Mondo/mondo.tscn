@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://ul0sjwc5g1bj"]
 
-[ext_resource type="PackedScene" uid="uid://bqvamx1iqlm6l" path="res://player.tscn" id="1_uwo7n"]
-[ext_resource type="Script" uid="uid://g3apgdhncgui" path="res://risorsa.gd" id="2_662ot"]
-[ext_resource type="PackedScene" uid="uid://du4yxrh2fvwwu" path="res://hud.tscn" id="2_dteo8"]
-[ext_resource type="Resource" uid="uid://ciegnny875k8r" path="res://legna.tres" id="3_fg1lv"]
+[ext_resource type="PackedScene" uid="uid://bqvamx1iqlm6l" path="res://Entità/Player/player.tscn" id="1_nxjju"]
+[ext_resource type="Script" uid="uid://g3apgdhncgui" path="res://Entità/Natura/risorsa.gd" id="2_unota"]
+[ext_resource type="Resource" uid="uid://ciegnny875k8r" path="res://Dati/Oggetti_Inventario/legna.tres" id="3_76moy"]
+[ext_resource type="PackedScene" uid="uid://du4yxrh2fvwwu" path="res://UI/hud.tscn" id="4_ft3ff"]
+[ext_resource type="PackedScene" uid="uid://5d20fx7jney7" path="res://UI/menu_radiale.tscn" id="5_mh5fn"]
+[ext_resource type="PackedScene" uid="uid://ukj727y3c2ay" path="res://UI/menu_inventario.tscn" id="6_unota"]
+[ext_resource type="PackedScene" uid="uid://b15di7qyl2xls" path="res://UI/menu_costruzione.tscn" id="7_76moy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7cglf"]
 size = Vector3(20, 0.1, 20)
@@ -29,12 +32,12 @@ mesh = SubResource("BoxMesh_7cglf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pavimento" unique_id=820904024]
 shape = SubResource("BoxShape3D_dteo8")
 
-[node name="Player" parent="." unique_id=1951639514 instance=ExtResource("1_uwo7n")]
+[node name="Player" parent="." unique_id=1951639514 instance=ExtResource("1_nxjju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29811287, 0.9820647, -0.0047159195)
 
 [node name="Cespuglio" type="StaticBody3D" parent="." unique_id=1414198585 groups=["Risorsa"]]
-script = ExtResource("2_662ot")
-dati_oggetto = ExtResource("3_fg1lv")
+script = ExtResource("2_unota")
+dati_oggetto = ExtResource("3_76moy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cespuglio" unique_id=101262364]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,4 +51,10 @@ mesh = SubResource("BoxMesh_dteo8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 45, 0)
 shadow_enabled = true
 
-[node name="HUD" parent="." unique_id=396746181 instance=ExtResource("2_dteo8")]
+[node name="HUD" parent="." unique_id=396746181 instance=ExtResource("4_ft3ff")]
+
+[node name="MenuRadiale" parent="." unique_id=820238104 instance=ExtResource("5_mh5fn")]
+
+[node name="MenuInventario" parent="." unique_id=672311078 instance=ExtResource("6_unota")]
+
+[node name="MenuCostruzione" parent="." unique_id=951170898 instance=ExtResource("7_76moy")]

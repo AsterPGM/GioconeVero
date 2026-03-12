@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://4htyuxk5rjy2"]
+
+[ext_resource type="Script" uid="uid://bxlwa6dvdlftd" path="res://UI/slot_costruzione.gd" id="1_0k2o8"]
+
+[node name="SlotCostruzione" type="Button" unique_id=1364941568]
+custom_minimum_size = Vector2(120, 120)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0k2o8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1000957302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IconaStruttura" type="TextureRect" parent="VBoxContainer" unique_id=1547327316]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NomeStruttura" type="Label" parent="VBoxContainer" unique_id=1226182435]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="TestoCosto" type="Label" parent="VBoxContainer" unique_id=73289218]
+layout_mode = 2
+horizontal_alignment = 1

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bqvamx1iqlm6l"]
 
-[ext_resource type="Script" uid="uid://chalat8qmsigg" path="res://player.gd" id="1_4flbx"]
-[ext_resource type="Resource" uid="uid://1f54kbb4hoao" path="res://muro_legna.tres" id="2_i3pqv"]
+[ext_resource type="Script" uid="uid://chalat8qmsigg" path="res://Entità/Player/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dw77s6j1s2mui" path="res://icon.svg" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bkgjm36r27mpr" path="res://Entità/Player/costruttore.gd" id="3_2kjab"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
@@ -12,7 +12,6 @@ albedo_color = Color(0.0045046993, 0.78235406, 0.011261749, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1951639514]
 script = ExtResource("1_4flbx")
-progetto_attuale = ExtResource("2_i3pqv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1706586963]
 shape = SubResource("CapsuleShape3D_onrkg")
@@ -25,9 +24,13 @@ texture = ExtResource("2_onrkg")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=32274822]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 8)
 
-[node name="Ologramma" type="MeshInstance3D" parent="." unique_id=776572375]
+[node name="Costruttore" type="Node3D" parent="." unique_id=1998470193]
+script = ExtResource("3_2kjab")
+
+[node name="BuildCast" type="ShapeCast3D" parent="Costruttore" unique_id=2124302240]
+enabled = false
+target_position = Vector3(0, 0, 0)
+
+[node name="Ologramma" type="MeshInstance3D" parent="Costruttore" unique_id=776572375]
 visible = false
 material_override = SubResource("StandardMaterial3D_i3pqv")
-
-[node name="BuildCast" type="ShapeCast3D" parent="." unique_id=2124302240]
-target_position = Vector3(0, 0, 0)

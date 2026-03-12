@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://ukj727y3c2ay"]
+
+[ext_resource type="Texture2D" uid="uid://dw77s6j1s2mui" path="res://icon.svg" id="1_mj03k"]
+[ext_resource type="Script" uid="uid://cdxbaf87jynv" path="res://UI/menu_inventario.gd" id="1_q8nlh"]
+
+[node name="MenuInventario" type="Control" unique_id=672311078]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q8nlh")
+
+[node name="PannelloInventario" type="ColorRect" parent="." unique_id=1956246181]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76000005
+anchor_top = 0.70000005
+anchor_right = 0.95900005
+anchor_bottom = 0.92300004
+offset_left = -16.041626
+offset_top = -19.005554
+offset_right = 14.710327
+offset_bottom = 18.490479
+color = Color(0.5686275, 0.31764707, 0.15686275, 1)
+
+[node name="ListaOggetti" type="VBoxContainer" parent="PannelloInventario" unique_id=831283711]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.108
+anchor_top = 0.123
+anchor_right = 0.90300006
+anchor_bottom = 0.86200005
+offset_left = -17.756004
+offset_top = -17.386003
+offset_right = 16.928986
+offset_bottom = 17.115997
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SlotLegna" type="HBoxContainer" parent="PannelloInventario/ListaOggetti" unique_id=870320842]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="Icona" type="TextureRect" parent="PannelloInventario/ListaOggetti/SlotLegna" unique_id=500773685]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_mj03k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TestoLegna" type="Label" parent="PannelloInventario/ListaOggetti/SlotLegna" unique_id=1547012728]
+layout_mode = 2
+text = "x 0"
+vertical_alignment = 1
+
+[node name="SlotPietra" type="HBoxContainer" parent="PannelloInventario/ListaOggetti" unique_id=553422267]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="Icona" type="TextureRect" parent="PannelloInventario/ListaOggetti/SlotPietra" unique_id=597451126]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_mj03k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TestoPietra" type="Label" parent="PannelloInventario/ListaOggetti/SlotPietra" unique_id=1687460565]
+layout_mode = 2
+text = "x 0"
+vertical_alignment = 1
